@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "sdk_version": "0.24.0",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://emboptlytfvzndhcrcqw.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "lensly-mcp",
+      "version": "0.1.0",
+      "title": "Lensly Photo Analysis"
+    },
+    "tools": [
+      {
+        "name": "analyze_image",
+        "title": "Analyze image",
+        "description": "Analyze a photo from an https URL and return a title, description, category, tags with confidence scores, contextual insights, and a quality score.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "imageUrl": {
+              "type": "string",
+              "description": "Public https URL of the image to analyze."
+            }
+          },
+          "required": [
+            "imageUrl"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "extract_text_from_image",
+        "title": "Extract text from image (OCR)",
+        "description": "Read any text visible in a photo from an https URL and return the extracted text plus the detected language.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "imageUrl": {
+              "type": "string",
+              "description": "Public https URL of the image to read text from."
+            }
+          },
+          "required": [
+            "imageUrl"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "translate_text",
+        "title": "Translate text",
+        "description": "Translate text (for example text extracted from a photo) into a target language. Defaults to English.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The text to translate."
+            },
+            "targetLanguage": {
+              "type": "string",
+              "description": "Target language name, e.g. 'Spanish'. Defaults to English."
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "summarize_text",
+        "title": "Summarize text",
+        "description": "Summarize text in a few sentences, preserving key facts, numbers, names, and intent.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The text to summarize."
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
